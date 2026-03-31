@@ -12,6 +12,7 @@ export default function SummaryDetail() {
     const fetchDetails = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/meetings/${id}`);
+        // await axios.get(`http://localhost:5000/api/summary/list-models`);
         setData(res.data);
       } catch (err) {
         console.error("Error fetching summary:", err);
@@ -75,7 +76,7 @@ export default function SummaryDetail() {
         {/* Left Column: Transcription */}
         <div className="lg:col-span-2 bg-[#16213e] rounded-2xl p-6 border border-white/5">
           <h2 className="text-lg font-bold mb-4 flex items-center gap-2">📑 Live Transcription</h2>
-          {/* <div className="h-[400px] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+          <div className="h-[400px] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
             {data?.transcription || data?.transcriptText ? (
               <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
                 {data.transcription || data.transcriptText}
@@ -83,7 +84,7 @@ export default function SummaryDetail() {
             ) : (
               <div className="text-center py-20 text-gray-500 italic">No transcription available. Click generate.</div>
             )}
-          </div> */}
+          </div>
 <div className="h-[400px] overflow-y-auto bg-black/20 p-4 rounded-lg">
   {/* Dono possible fields check karein */}
   {data?.transcriptText || data?.transcription ? (
@@ -101,6 +102,7 @@ export default function SummaryDetail() {
               Generate AI Summary
             </button>
           </div>
+
         </div>
         
 

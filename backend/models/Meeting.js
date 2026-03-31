@@ -1,15 +1,14 @@
 // models/Meeting.js
 import mongoose from "mongoose";
-
 const MeetingSchema = new mongoose.Schema({
   title: { type: String, required: true },
   date: { type: Date, required: true },
   description: { type: String, required: true },
-  // ... any other fields you added
-  transcription: { type: String, default: "" },
-  summary: { type: Object, default: null }
+  roomName: { type: String }, 
+  hostId: { type: String },   
+  transcriptText: { type: String, default: "" },
+  isTranscriptionEnabled: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
 });
 
-// This is the critical line
-const Meeting = mongoose.models.Meeting || mongoose.model("Meeting", MeetingSchema);
-export default Meeting;
+export default mongoose.models.Meeting || mongoose.model("Meeting", MeetingSchema);

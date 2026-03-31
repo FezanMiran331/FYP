@@ -1,36 +1,34 @@
+//backend/test-data.js
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import Meeting from './models/Meeting.js'; // Check path sahi ho
+import Meeting from './models/Meeting.js'; 
 
 dotenv.config();
-
 const updateMeetingWithText = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to DB...");
 
-    // YAHAN APNI MEETING ID DAALEIN (Jo aapke browser URL mein hai)
-    const meetingId = "69b92045c26a1988ea18cb83"; 
+    const meetingId = "69acde686974013eaa7edf57"; 
 
     const dummyTranscript = `
       Speaker 1: Welcome everyone to the HoloMeet project discussion.
-      Speaker 2: Today we are reviewing the AI transcription module.
-      Speaker 1: Great. We decided to remove the manual audio recording and move to live text.
-      Speaker 3: I will handle the frontend updates for the summary display.
-      Speaker 2: I'll make sure the OpenAI API key is working for GPT-4o.
-      Speaker 1: Perfect. Let's finish this by Friday.
+      Speaker 2: We are testing the Gemini summary generation today.
+      Speaker 3: Everything looks good on the frontend.
+      Speaker 1: Let's aim to finish this by Friday.
     `;
 
+    // FIX: Model ke mutabiq field name 'transcriptText' use kiya hai
     const updated = await Meeting.findByIdAndUpdate(
       meetingId,
-      { transcriptText: dummyTranscript },
+      { transcriptText: dummyTranscript }, 
       { new: true }
     );
 
     if (updated) {
-      console.log("✅ Success! Transcript added to Meeting:", updated.title);
+      console.log("✅ SUCCESS: Data added to 'transcriptText' field for:", updated.title);
     } else {
-      console.log("❌ Meeting not found. Check the ID.");
+      console.log("❌ ERROR: Meeting ID not found.");
     }
 
     process.exit();

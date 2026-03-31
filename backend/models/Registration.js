@@ -13,6 +13,6 @@ const Registration_Schema = new mongoose.Schema({
   Con_Password: { type: String, required: true },
 }, { timestamps: true });
 
-const Register = mongoose.model("Registration", Registration_Schema);
+const Register = mongoose.models.Registration || mongoose.model("Registration", Registration_Schema);
 export default Register;
  
